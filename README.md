@@ -1,8 +1,24 @@
 # Kotlin
 
+## Agenda
+
+* ~60 minutes presentation
+* ~120 minutes mob programming
+
 ![](img/kotlin.png)
 
-* Statically typed programming language for modern multiplatform applications
+## Kotlin in a nutshell
+
+* "Java without the boilerplate"
+* Killer features:
+  * Null-safety
+  * Data classes
+  * Extension functions
+* Compilation targets:
+  * JVM 6/8 bytecode (excellent Kotlin&#8596;Java interop)
+  * EcmaScript 5.1 (2011)
+  * LLVM-IR (experimental)
+* https://kotlinlang.org
 
 ## Birth
 
@@ -17,6 +33,8 @@
 |-+-+-+-+-|-+-+-+-+-|-+-+-+-+-|-+-+-+-+-|-+-+-+-+-|
 95        00        05        10        15        20
 ```
+
+![](img/breslav.jpg)
 
 ## Milestones
 
@@ -402,8 +420,7 @@ public static List<? extends Object> randomList() {
     }
 }
 ```
-* Joshua Bloch, when lambdas were still brewing:
-> We simply cannot afford another wildcards
+> **Joshua Bloch:** We simply cannot afford another wildcards
 
 ```java
 public class Collections {
