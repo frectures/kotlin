@@ -20,25 +20,17 @@
 
 ## Milestones
 
-### Kotlin 1.0
-
 ![](img/one.png)
-
-### Gradle support
 
 ![](img/gradle.png)
 
-### Spring support
-
 ![](img/spring.png)
-
-### Android support
 
 ![](img/android.png)
 
-### Kotlin 1.2
-
 ![](img/sharing.png)
+
+![](img/coroutines.png)
 
 ### [Stack overflow developer survey 2018](https://insights.stackoverflow.com/survey/2018/#most-loved-dreaded-and-wanted)
 
