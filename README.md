@@ -5,6 +5,10 @@
 * ~60 minutes presentation
 * ~120 minutes mob programming
 
+> **Rich Hickey:** If you want everything to be familiar,  
+> you will never learn anything new because it can't be  
+> significantly different from what you already know.
+
 ![](img/kotlin.png)
 
 ## Kotlin in a nutshell
@@ -24,17 +28,25 @@
 
 ![](img/jetbrains.png)
 ![](img/idea.png)
+![](img/breslav.jpg)
 
 ```text
-                                  Kotlin
-                  Scala           |
-  Java            |               |
-  |               |               |
-|-+-+-+-+-|-+-+-+-+-|-+-+-+-+-|-+-+-+-+-|-+-+-+-+-|
-95        00        05        10        15        20
+                                                                                        1.1    1.3
+    Java                            Scala                         Kotlin            1.0 |  1.2 |
+    |                               |                             |                 |   |  |   |
+|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|
+95                  00  |               05                  10        |         15         |        20
+                    |   IntelliJ IDEA                                 |          |         |
+                    |                                                 Karel      skorbut   Karel
+                    JetBrains                                        (Scala)     (Kotlin) (Kotlin)
 ```
 
-![](img/breslav.jpg)
+![](img/karel.png)
+![](img/skorbut.png)
+
+> **Dennis Ritchie:** The only way to  
+> learn a new programming language  
+> is by writing programs in it.
 
 ## Milestones
 
@@ -456,4 +468,4 @@ public interface List<out E> : Collection<E> {
 
 ## Mob programming
 
-![](img/karel.png)
+![](img/lampions.png)
