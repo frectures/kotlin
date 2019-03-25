@@ -388,8 +388,7 @@ fun String?.orEmpty(): String {
 /**
  * Returns a list containing only elements matching the given [predicate].
  */
-public inline fun <T>
-Iterable<T>.filter(predicate: (T) -> Boolean): List<T>
+public inline fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T>
 
 fun main() {
     val languages = listOf("Java", "Scala", "Kotlin")
@@ -455,10 +454,7 @@ public static List<? extends Object> randomList() {
 > **Joshua Bloch:** We simply cannot afford another wildcards
 
 ```java
-public class Collections {
-    public static <T extends Object & Comparable<? super T>>
-    T max(Collection<? extends T>) { ... }
-}
+public static <T extends Object & Comparable<? super T>> T max(Collection<? extends T> coll)
 ```
 
 ### Kotlin Generics have declaration-site variance
