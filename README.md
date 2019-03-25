@@ -32,8 +32,8 @@
 
 ```text
                                                                                         1.1    1.3
-    Java                            Scala                         Kotlin            1.0 |  1.2 |
-    |                               |                             |                 |   |  |   |
+    Java                            Scala                Clojure  Kotlin            1.0 |  1.2 |
+    |                               |                    |        |                 |   |  |   |
 |---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|
 95                  00  |               05                  10        |         15         |        20
                     |   IntelliJ IDEA                                 |          |         |
@@ -199,6 +199,8 @@ fun login() {
 }
 ```
 
+* `val` is like `var`, but cannot be rebound
+  * like `final var` in Java 10
 * Kotlin does not have a `new` keyword
 * Clashing keywords can be escaped with backticks
 * `==` and `!=` on references delegates to `equals`
@@ -258,7 +260,7 @@ data class Name(val forename: String,
 A data class auto-generates the following members:
 * Constructor
 * Getters
-* (Setters for `var` fields)
+* Setters (for `var` fields)
 * `equals`
 * `hashCode`
 * `toString`
@@ -310,6 +312,16 @@ fun canPassString(s: String?) {
 * Inside the `if` block, the type of `s` is adjusted from `String?` to `String`
   * flow-sensitive typing
 
+```kotlin
+fun nullSafeLengthVerbose(s: String?): Int {
+    return if (s != null) s.length else 0
+}
+
+fun nullSafeLengthConcise(s: String?): Int {
+    return s?.length ?: 0
+}
+```
+
 ### `copy` / named arguments
 
 ```kotlin
@@ -357,6 +369,14 @@ fun String.reverse(): String {
 
 fun main() {
     println("A man, a plan, a canal, panama".reverse())
+}
+
+fun String?.nullSafeLength(): Int {
+    return this?.length ?: 0
+}
+
+fun String?.orEmpty(): String {
+    return this ?: ""
 }
 ```
 * Extension functions are compiled to static helper methods with an additional `$receiver` parameter
