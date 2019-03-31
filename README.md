@@ -91,11 +91,7 @@ fun main() {
 
 ## Primitive types
 
-* `Boolean`
-* `Byte`
-* `Char`
-* `Short`, `Int`, `Long`
-* `Float`, `Double`
+![](img/primitive.svg)
 
 ### Boxing
 
