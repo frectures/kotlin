@@ -446,7 +446,7 @@ fun main() {
 
 * The last lambda argument can be moved out of the argument list
 
-## Generics
+## Collections
 
 ### Why does this not compile?
 
@@ -498,7 +498,7 @@ fun randomList(): List<Any> {
 }
 ```
 
-* Kotlin Lists are read-only, hence this is type-safe:
+* Kotlin `List`s are read-only, hence this is type-safe:
 
 ```kotlin
 /**
@@ -510,6 +510,10 @@ fun randomList(): List<Any> {
 public interface List<out E> : Collection<E> {
                    // ~~~
 ```
+
+![](img/list.svg)
+
+* Similar relations exist for `Set`/`MutableSet` and `Map`/`MutableMap`
 
 ## Mob programming
 
