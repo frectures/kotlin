@@ -312,15 +312,7 @@ fun main() {
 }
 ```
 
-* `String?` is a supertype of `String` and `null`
-* Null-safe Java interop is a pragmatic compromise:
-  * `@Nullable java.lang.String` &#8594; `kotlin.String?`
-  * `@NotNull java.lang.String` &#8594; `kotlin.String`
-  * `java.lang.String` &#8594; unspeakable type `kotlin.String!`
-    * `String!` is a subtype of both `String?` and (perhaps surprisingly) `String`
-* Adding null-safety to a popular language is hard:
-  * TypeScript 2.0
-  * C# 8
+![](img/null.svg)
 
 ### `NullPointerException` is very rare in Kotlin
 
