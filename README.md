@@ -19,7 +19,7 @@
   * Data classes
   * Extension functions
 * Compilation targets:
-  * JVM 6/8 bytecode (excellent Kotlin&#8596;Java interop)
+  * JVM 6/8 bytecode (excellent Kotlin&#10231;Java interop)
   * EcmaScript 5.1 (2011)
   * LLVM-IR (experimental)
 * https://kotlinlang.org
@@ -32,13 +32,13 @@
 
 ```text
                                                                                         1.1    1.3
-    Java                            Scala                Clojure  Kotlin            1.0 |  1.2 |
-    |                               |                    |        |                 |   |  |   |
+    Java                            Scala                         Kotlin            1.0 |  1.2 |
+    |                               |                             |                 |   |  |   |
 |---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|
-95                  00  |               05                  10        |         15         |        20
-                    |   IntelliJ IDEA                                 |          |         |
-                    |                                                 Karel      skorbut   Karel
-                    JetBrains                                        (Scala)     (Kotlin) (Kotlin)
+   96              00   |              05                | 10         |        15          |       20
+                    |   IntelliJ IDEA                    |            |          |         |
+                    |                                    |            Karel      skorbut   Karel
+                    JetBrains                            Clojure     (Scala)     (Kotlin) (Kotlin)
 ```
 
 ![](img/karel.png)
@@ -81,7 +81,7 @@ fun main(args: Array<String>): Unit {
   * `args` array can be omitted
 * `Unit` is Kotlin-speak for `void`
   * Return type `Unit` can be omitted
-* Semicolons are optional
+* Semicolons can be omitted
 
 ```kotlin
 fun main() {
@@ -89,9 +89,7 @@ fun main() {
 }
 ```
 
-## Type system
-
-### Primitive types
+## Primitive types
 
 * `Boolean`
 * `Byte`
@@ -101,35 +99,30 @@ fun main() {
 
 ### Boxing
 
-* `Int` is either `int` or `Integer`, depending on context:
+* `Int` is usually `int`, unless boxing necessitates `Integer`:
 
 ```kotlin
-fun addNumbers(numbers: List<Int>): Int {
+fun sumNumbers(numbers: List<Int>): Int {
                        // Integer   int
     var result = 0
              // int
     for (x in numbers) {
+     // int
         result += x
     }
     return result
 }
+
+fun main() {
+    println(sumNumbers(listOf(2, 3, 5, 7)))
+    // Summing numbers is already implemented in the standard library though:
+    println(listOf(2, 3, 5, 7).sum())
+}
 ```
 
-### `Any` is the new `Object`
+## Control structure expressions
 
-* Every class without an explicit parent inherits from `Any`
-* `Any` only has 3 methods:
-  * `equals`
-  * `hashCode`
-  * `toString`
-* `Object` has 5 more methods related to concurrency:
-  * `notify`
-  * `notifyAll`
-  * `wait` (3 overloads)
-
-## Control structures
-
-### `if`
+### `if` expression
 
 ```kotlin
 fun digitOrNumber(x: Int): String {
@@ -149,25 +142,37 @@ fun digitOrNumber(x: Int) = if (x in 0..9) "digit" else "number"
 
 * Many statements in Java are expressions in Kotlin
 * It is usually a bad idea to omit public return types
-* Omit braces only for trivial function bodies
+* Protip: Omit braces only for trivial function bodies
 
-### `when`
+### `when` expression
 
 ```kotlin
-fun howMany(x: Int): String = when (x) {
-    0 -> "none"
-    1 -> "one"
-    2 -> "two"
+fun describe(x: Int): String = when (x) {
+    0    -> "none"
+    1    -> "one"
+    2    -> "two"
     else -> "many"
 }
 
-fun describe(x: CharSequence): String = when(x) {
-    is String -> "String"
-    is StringBuilder -> "StringBuilder"
-    is StringBuffer -> "StringBuffer"
-    else -> "some other CharSequence"
+fun count(x: Any): Int = when(x) {
+    is Array<*>      -> x.size
+    is String        -> x.length
+    is Collection<*> -> x.size
+    else             -> 0
 }
 ```
+
+## `Any` is the new `Object`
+
+* Every class without an explicit parent inherits from `Any`
+* `Any` only has 3 methods:
+  * `equals`
+  * `hashCode`
+  * `toString`
+* `Object` has 5 more methods related to concurrency:
+  * `notify`
+  * `notifyAll`
+  * `wait` (3 overloads)
 
 ## Can you spot the bug?
 
@@ -204,7 +209,7 @@ fun login() {
 * Kotlin does not have a `new` keyword
 * Clashing keywords can be escaped with backticks
 * `==` and `!=` on references delegates to `equals`
-* Object identity can be tested with `===` and `!==`
+  * Object identity can be tested with `===` and `!==`
 
 ## Value objects
 
@@ -213,18 +218,36 @@ public class Name {
     private final String forename;
     private final String surname;
 
+    /**
+     * @require forename != null
+     * @require surename != null
+     * @ensure getForename() == forename
+     * @ensure getSurename() == surname
+     */
     public Name(String forename, String surname) {
-        Objects.requireNonNull(forename);
-        Objects.requireNonNull(surname);
+        assert forename != null;
+        assert surname != null;
+
         this.forename = forename;
         this.surname = surname;
+
+        assert getForename() == forename;
+        assert getSurename() == surename;
     }
 
+    /**
+     * @ensure result != null
+     */
     public String getForename() {
+        assert forename != null;
         return forename;
     }
 
+    /**
+     * @ensure result != null
+     */
     public String getSurname() {
+        assert surname != null;
         return surname;
     }
 
@@ -244,9 +267,13 @@ public class Name {
 
     @Override
     public String toString() {
-        return "Name(forename=" + forename
-                 + ", surname=" + surname + ")";
+        return "Name(forename=" + forename + ", surname=" + surname + ")";
     }
+}
+
+public class NameTest {
+    @Test
+    // ...another 50+ lines of code...
 }
 ```
 
@@ -267,7 +294,9 @@ A data class auto-generates the following members:
 * `copy` method (functional 'setter')
 * `componentN` methods (for destructuring)
 
-## Nullable types
+https://cr.openjdk.java.net/~briangoetz/amber/datum.html
+
+## Null-safety
 
 ```kotlin
 fun mustPassString(s: String) {
@@ -288,6 +317,14 @@ fun main() {
 ```
 
 * `String?` is a supertype of `String` and `null`
+* Null-safe Java interop is a pragmatic compromise:
+  * `@Nullable java.lang.String` &#8594; `kotlin.String?`
+  * `@NotNull java.lang.String` &#8594; `kotlin.String`
+  * `java.lang.String` &#8594; unspeakable type `kotlin.String!`
+    * `String!` is a subtype of both `String?` and (perhaps surprisingly) `String`
+* Adding null-safety to a popular language is hard:
+  * TypeScript 2.0
+  * C# 8
 
 ### `NullPointerException` is very rare in Kotlin
 
@@ -309,8 +346,7 @@ fun canPassString(s: String?) {
 }
 ```
 
-* Inside the `if` block, the type of `s` is adjusted from `String?` to `String`
-  * flow-sensitive typing
+* Flow-sensitive typing: Inside the `if` block, the type of `s` is adjusted from `String?` to `String`
 
 ```kotlin
 fun nullSafeLengthVerbose(s: String?): Int {
@@ -381,6 +417,7 @@ fun String?.orEmpty(): String {
 ```
 * Extension functions are compiled to static helper methods with an additional `$receiver` parameter
 * Inside an extension function, only the public interface of the `$receiver` is available
+* Not as general as Scala's `implicit`s, but much simpler and good enough in most cases
 
 ## Function types and lambdas
 
@@ -401,6 +438,8 @@ fun main() {
 }
 ```
 
+* If the only argument is a lambda, the parentheses can be omitted
+
 ## Custom control structures
 
 ```kotlin
@@ -416,6 +455,8 @@ fun main() {
     }
 }
 ```
+
+* The last lambda argument can be moved out of the argument list
 
 ## Generics
 
