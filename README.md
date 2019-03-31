@@ -518,3 +518,5 @@ public interface List<out E> : Collection<E> {
 ## Mob programming
 
 ![](img/lampions.png)
+
+![](img/world.svg)
