@@ -62,9 +62,41 @@
 
 ![](img/coroutines.png)
 
-### [Stack overflow developer survey 2018](https://insights.stackoverflow.com/survey/2018/#most-loved-dreaded-and-wanted)
+### [Stack overflow developer survey 2019](https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted)
 
-![](img/loved.png)
+**Loved:** % of developers who are developing with the language or technology and have expressed interest in continuing to develop with it
+
+**Dreaded:** % of developers who are developing with the language or technology but have *not* expressed interest in continuing to do so
+
+**Wanted:** % of developers who are *not* developing with the language or technology but have expressed interest in developing with it
+
+|      | Loved       | Dreaded     | Wanted      |
+| ---: | ----------- | ----------- | ----------- |
+|    1 | Rust        | VBA         | Python      |
+|    2 | Python      | Objective-C | JavaScript  |
+|    3 | TypeScript  | Assembly    | Go          |
+|    4 | **Kotlin**  | C           | TypeScript  |
+|    5 | WebAssembly | PHP         | **Kotlin**  |
+|    6 | Swift       | Erlang      | Rust        |
+|    7 | Clojure     | Ruby        | C++         |
+|    8 | Elixir      | R           | WebAssembly |
+|    9 | Go          | C++         | Java        |
+|   10 | C#          | Java        | SQL         |
+|   11 | JavaScript  | Scala       | C#          |
+|   12 | Dart        | PowerShell  | HTML/CSS    |
+|   13 | SQL         | F#          | Swift       |
+|   14 | HTML/CSS    | HTML/CSS    | C           |
+|   15 | F#          | SQL         | R           |
+|   16 | PowerShell  | Dart        | Ruby        |
+|   17 | Scala       | JavaScript  | Scala       |
+|   18 | Java        | C#          | PowerShell  |
+|   19 | C++         | Go          | Dart        |
+|   20 | R           | Elixir      | PHP         |
+|   21 | Ruby        | Clojure     | Elixir      |
+|   22 | Erlang      | Swift       | F#          |
+|   23 | PHP         | WebAssembly | Assembly    |
+|   24 | C           | **Kotlin**  | Clojure     |
+|   25 | Assembly    | TypeScript  | Erlang      |
 
 ## Hello World
 
