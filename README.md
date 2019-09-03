@@ -190,11 +190,17 @@ fun describe(x: Int): String = when (x) {
     else -> "many"
 }
 
-fun count(x: Any): Int = when(x) {
+fun count(x: Any): Int = when (x) {
     is Array<*>      -> x.size
     is String        -> x.length
     is Collection<*> -> x.size
     else             -> 0
+}
+
+fun signum(x: Int): Int = when {
+    x<0  -> -1
+    x>0  -> +1
+    else ->  0
 }
 ```
 
