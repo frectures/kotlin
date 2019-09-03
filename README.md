@@ -1,15 +1,10 @@
 # Kotlin
 
-## Agenda
-
-* ~60 minutes presentation
-* ~120 minutes mob programming
+![](img/kotlin.png)
 
 > **Rich Hickey:** If you want everything to be familiar,  
 > you will never learn anything new because it can't be  
 > significantly different from what you already know.
-
-![](img/kotlin.png)
 
 ## Kotlin in a nutshell
 
