@@ -62,6 +62,8 @@
 
 ![](img/coroutines.png)
 
+![](img/kotlin-first.png)
+
 ### [Stack overflow developer survey 2019](https://insights.stackoverflow.com/survey/2019#most-loved-dreaded-and-wanted)
 
 **Loved:** % of developers who are developing with the language or technology and have expressed interest in continuing to develop with it
