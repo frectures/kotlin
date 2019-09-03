@@ -118,6 +118,17 @@ fun main() {
 }
 ```
 
+> **Exercise**
+> 1. Download [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download)
+> 2. Create a *Hello World* project
+>    - File > New > Project...
+>    - Java
+>    - Additional Libraries and Frameworks: [x] Kotlin/JVM
+>    - Next
+>    - Finish
+> 3. Add a `Main` file to the `src` folder
+> 4. Print something interesting to the console
+
 ## Primitive types
 
 ![](img/primitive.svg)
@@ -186,6 +197,9 @@ fun count(x: Any): Int = when(x) {
     else             -> 0
 }
 ```
+
+> **Exercise**
+> 1. Implement a function `gcd` which computes the greatest common divisor of two integers
 
 ## `Any` is the new `Object`
 
@@ -321,6 +335,11 @@ A data class auto-generates the following members:
 
 https://cr.openjdk.java.net/~briangoetz/amber/datum.html
 
+> **Exercise**
+> 1. Implement a data class `Address` with fields of your choice
+> 2. Populate a list of addresses
+> 3. Print the addresses to the console
+
 ## Null-safety
 
 ```kotlin
@@ -375,6 +394,10 @@ fun nullSafeLengthConcise(s: String?): Int {
 }
 ```
 
+> **Exercise**
+> 1. Add a nullable field `remark` to the `Address` class
+> 2. Print all addresses with remarks before all addresses without remarks
+
 ### `copy` / named arguments
 
 ```kotlin
@@ -392,6 +415,9 @@ fun copy(forename: String = this.forename,
     return Name(forename, surname)
 }
 ```
+
+> **Exercise**
+> 1. Implement a `dropRemark` method in the `Address` class
 
 ### Destructuring
 
@@ -435,6 +461,10 @@ fun String?.orEmpty(): String {
 * Extension functions are compiled to static helper methods with an additional `$receiver` parameter
 * Inside an extension function, only the public interface of the `$receiver` is available
 * Not as general as Scala's `implicit`s, but much simpler and good enough in most cases
+
+> **Exercise**
+> 1. Implement an extension function `String.isPalindrome`
+> 2. Implement an extension function such that `listOf(2, 3, 5, 7).product()` returns 210
 
 ## Function types and lambdas
 
