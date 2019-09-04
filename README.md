@@ -433,6 +433,18 @@ fun printNames(names: List<Name>) {
         println(sur + ", " + fore)
     }
 }
+
+fun <E> printElementsWithIndex(list: List<E>) {
+    for ((index, value) in list.withIndex()) {
+        println(index.toString() + ": " + value.toString())
+    }
+}
+
+fun <K, V> printMapEntries(map: Map<K, V>) {
+    for ((key, value) in map.entries) {
+        println(key.toString() + ": " + value.toString())
+    }
+}
 ```
 
 ### String interpolation
@@ -441,6 +453,18 @@ fun printNames(names: List<Name>) {
 fun printNames(names: List<Name>) {
     for ((fore, sur) in names) {
         println("$sur, $fore")
+    }
+}
+
+fun <E> printElementsWithIndex(list: List<E>) {
+    for ((index, value) in list.withIndex()) {
+        println("$index: $value")
+    }
+}
+
+fun <K, V> printMapEntries(map: Map<K, V>) {
+    for ((key, value) in map.entries) {
+        println("$key: $value")
     }
 }
 ```
