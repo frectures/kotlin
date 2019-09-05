@@ -609,3 +609,10 @@ public interface List<out E> : Collection<E> {
 ![](img/lampions.png)
 
 ![](img/world.svg)
+
+## Further interesting topics
+
+- https://kotlinlang.org/docs/tutorials/coroutines/coroutines-basic-jvm.html
+- https://ktor.io/quickstart
+- https://kotlinlang.org/docs/tutorials/native/basic-kotlin-native-app.html
+- https://kotlinlang.org/docs/reference/multiplatform.html
