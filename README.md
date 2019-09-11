@@ -265,9 +265,9 @@ public class Name {
 
     /**
      * @require forename != null
-     * @require surename != null
+     * @require surname != null
      * @ensure getForename() == forename
-     * @ensure getSurename() == surname
+     * @ensure getSurname() == surname
      */
     public Name(String forename, String surname) {
         assert forename != null;
@@ -277,7 +277,7 @@ public class Name {
         this.surname = surname;
 
         assert getForename() == forename;
-        assert getSurename() == surename;
+        assert getSurname() == surname;
     }
 
     /**
