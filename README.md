@@ -2,21 +2,6 @@
 
 ![](img/kotlin.png)
 
-## Testimonials
-
-### [Egineering at Meta](https://twitter.com/fb_engineering/status/1584643794351583233)
-
-> - Meta has adopted Kotlin as its **new primary language** for Android development
-> - Meta is migrating its Android codebase from Java to Kotlin
-> - over 10 million lines of Kotlin code
-
-### [Adopting Kotlin at Google](https://www.youtube.com/watch?v=hXfGybzWaiA)
-
-> - Kotlin is now the **recommended programming language**
->   - not only for Android programming
->   - but also for server-side JVM usage at Google
-> - over 8 million lines of Kotlin code
-
 ## Kotlin in a nutshell
 
 - “Java after spring cleaning”
@@ -30,23 +15,6 @@
   - [JavaScript](https://kotlinlang.org/docs/js-overview.html)
   - [WebAssembly](https://kotlinlang.org/docs/wasm-overview.html)
   - [Native](https://kotlinlang.org/docs/native-overview.html) (Windows, macOS, iOS, Linux, Android)
-
-## Birth
-
-![](img/jetbrains.png)
-![](img/idea.png)
-![](img/breslav.jpg)
-
-```text
-                                                                                    1.1    1.3       1.5    1.8
-Java                            Scala                         Kotlin            1.0 |  1.2 |      1.4| 1.6  | 1.9
-|                               |                             |                 |   |  |   |      |  | | 1.7| |
-+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---+---|---+---+---+---
-96             00   |              05                  10         |        15          |       20
-                |   IntelliJ IDEA                                 |          |         |
-                |                                                 Karel      skorbut   Karel
-                JetBrains                                        (Scala)     (Kotlin) (Kotlin)
-```
 
 ## Hello World
 
@@ -70,17 +38,6 @@ fun main() {
     println("Hello Kotlin!")
 }
 ```
-
-> **Exercise**
-> 1. Download [IntelliJ IDEA **Community Edition**](https://www.jetbrains.com/idea/download) 👇 **Scroll Down** 👇
-> 2. Import the *Hello World* project
->    - File > New > Project from Version Control...
->    - URL: https://github.com/frectures/kotlin.git
->    - Clone
-> 3. If the Project View is hidden, press Alt+1
-> 4. Open `src/main/kotlin/Kotlin.kt`
-> 5. Start the `main` function via the green triangle beside it
-> 6. Modify the program to print something else
 
 ## Basic types
 
@@ -208,9 +165,6 @@ fun signum(x: Int): Int = when {
 }
 ```
 
-> **Exercise**
-> 1. Implement a function `gcd` which computes the greatest common divisor of two integers
-
 ## Default and Named arguments
 
 ```java
@@ -282,43 +236,6 @@ public open class Any {
 - `open class`es are inheritable
 - `open fun`ctions are overridable
 
-### [Joshua Bloch – Design and document for inheritance or else prohibit it](https://blogs.oracle.com/javamagazine/post/java-inheritance-design-document)
-
-```java
-class CountingList<E> extends ArrayList<E> {
-    private int elementsAdded;
-    
-    @Override
-    public boolean add(E e) {
-        elementsAdded += 1;
-        return super.add(e);
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        elementsAdded += c.size();
-        // Does super.addAll call this.add internally?
-        return super.addAll(c);
-    }
-}
-```
-
-> - Designing a class for inheritance is hard work
-> - You must document all its self-use patterns, and once you've documented them,
-> you must commit to them for the life of the class
-> - If you fail to do this, subclasses may become dependent on implementation details of the superclass
-> and may break if the implementation of the superclass changes
-> - Unless you know there is a real need for subclasses,
-> **you are probably better off prohibiting inheritance** by declaring your class `final`
-
-### https://kotlinlang.org/docs/all-open-plugin.html
-
-> - Kotlin has classes and their members `final` by default
->   - which makes it inconvenient to use frameworks and libraries such as Spring AOP that require classes to be `open`
-> - The `all-open` compiler plugin adapts Kotlin to the requirements of those frameworks
->   - and makes **classes annotated with a specific annotation and their members open** without the explicit `open` keyword
->   - e.g. `@Transactional` classes
-
 ### Can you spot the bug?
 
 ```java
@@ -386,11 +303,6 @@ data class Name(val forename: String, val surename: String) {
     // auto-generated: equals, hashCode, toString, copy, component1, component2
 }
 ```
-
-> **Exercise**
-> 1. Implement a data class `Address` with fields of your choice
-> 2. Populate a list of addresses
-> 3. Print the addresses to the console
 
 ## Null safety
 
@@ -507,27 +419,6 @@ public static void publicFunction(String s) {
 </tr>
 </table>
 
-> **Exercise**
-> 1. Add a nullable field `remark` to the `Address` class
-> 2. Print all addresses *with* remarks before all addresses *without* remarks
-
-### `copy` data objects
-
-```kotlin
-val jamesGosling = Name("James", "Gosling")
-
-val jamesBond = jamesGosling.copy(surename = "Bond")
-```
-
-- The `copy` method has default arguments for all fields:
-
-```kotlin
-fun copy(forename: String = this.forename, surename: String = this.surename) = Name(forename, surename)
-```
-
-> **Exercise**
-> 1. Implement a `withoutRemark(): Address` method, using the `copy` method
-
 ## Extension functions
 
 ```kotlin
@@ -546,10 +437,6 @@ fun main() {
 
 - Extension functions are compiled to static helper methods with an additional `$receiver` parameter
 - Inside an extension function, only the public interface of the `$receiver` is available
-
-> **Exercise**
-> 1. Implement an extension function `String.isPalindrome()`
-> 2. Implement an extension function such that `listOf(2, 3, 5, 7).product()` returns 210
 
 ## Properties
 
@@ -690,28 +577,6 @@ fun addBook(book: Book) {
     synchronized(books) {
         books.add(book)
     }
-}
-```
-
-### close after use
-
-```kotlin
-val inputStream = largestDownload().inputStream().buffered()
-// ... arbitrary code, might throw exception before close ...
-inputStream.close()
-```
-
-```kotlin
-val inputStream = largestDownload().inputStream().buffered()
-inputStream.use {
-    // ...
-}
-// ... arbitrary code, might use inputStream after close ...
-```
-
-```kotlin
-largestDownload().inputStream().buffered().use { inputStream ->
-    // ...
 }
 ```
 
@@ -957,111 +822,7 @@ public interface MutableList<E> : List<E>, MutableCollection<E> {
 
 - Similar relations exist for `Set`/`MutableSet` and `Map`/`MutableMap`
 
-### Iteration
-
-*for each* element:
-
-```kotlin
-val fruits = listOf("apple", "banana", "cherry")
-
-for (fruit in fruits) {
-    println(fruit)
-}
-
-fruits.forEach { fruit ->
-    println(fruit)
-}
-
-fruits.forEach {
-    println(it)
-}
-
-fruits.forEach(::println)
-```
-
-*for each* index & element:
-
-```kotlin
-for (index in 0 until fruits.size) {
-    val fruit = fruits[index]
-    println("$index: $fruit")
-}
-
-for (index in 0 .. fruits.lastIndex) {
-    val fruit = fruits[index]
-    println("$index: $fruit")
-}
-
-for (index in fruits.indices) {
-    val fruit = fruits[index]
-    println("$index: $fruit")
-}
-
-for ((index, fruit) in fruits.withIndex()) {
-    println("$index: $fruit")
-}
-
-fruits.forEachIndexed { index, fruit ->
-    println("$index: $fruit")
-}
-```
-
-*for each* key & value:
-
-```kotlin
-val fruits = mapOf("apple" to "🍎", "banana" to "🍌", "cherry" to "🍒")
-
-for (entry in fruits) {
-    println("${entry.key}: ${entry.value}")
-}
-
-fruits.forEach { entry ->
-    println("${entry.key}: ${entry.value}")
-}
-
-for ((key, value) in fruits) {
-    println("$key: $value")
-}
-
-fruits.forEach { (key, value) ->
-    println("$key: $value")
-}
-```
-
 ## Katas/Dojos
 
 - https://adventofcode.com
 - https://leetcode.com/problemset/all
-
-### Regular expressions
-
-```kotlin
-data class Address(val street: String, val streetNumber: String) {
-    companion object {
-        val ADDRESS: Regex = """(\D+?)\s*(\d+.*)""".toRegex()
-
-        @JvmStatic
-        fun parse(line: String): Address {
-            val (street, streetNumber) = ADDRESS.matchEntire(line)?.destructured ?: error(line)
-            return Address(street, streetNumber)
-        }
-    }
-}
-
-fun main() {
-    val text = """
-        Musterstr.123
-        Muster-Gasse 4e
-        Unter der Ulme 6g
-    """.trimIndent()
-    val addresses = text.lines().map(Address::parse)
-    println(addresses)
-}
-```
-
-- Companion objects replace `static` members
-  - adopted from Scala
-  - `@JvmStatic` provides `static` bridge for Java interop
-- Triple quotes introduce raw strings
-  - `\` instead of `\\`
-  - actual line break instead of `\n`
