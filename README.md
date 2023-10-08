@@ -720,58 +720,52 @@ largestDownload().inputStream().buffered().use { inputStream ->
 ### `let`
 
 ```kotlin
-private var folder: String = Toolkit.getDefaultToolkit().screenSize.height.let { screenHeight ->
-    if (screenHeight < 1000) FOLDER_40 else FOLDER_64
-}
+private var folder: String = if (Toolkit.getDefaultToolkit().screenSize.height < 1000) FOLDER_40 else FOLDER_64
 ```
 
 ```kotlin
-fun generateLabyrinth(): World {
-    while (true) {
-        LabyrinthGenerator().generateOrNull()?.let { return it }
-    }
+private var folder: String = Toolkit.getDefaultToolkit().screenSize.height.let { screenHeight ->
+    if (screenHeight < 1000) FOLDER_40 else FOLDER_64
 }
 ```
 
 ### `apply`
 
 ```kotlin
-val randomize = JButton("🎲").apply {
+private val randomize = JButton("🎲").apply {
     isEnabled = false
-}
-```
-
-```kotlin
-fun horizontalBoxPanel(vararg components: Component) = JPanel().apply {
-    layout = BoxLayout(this, BoxLayout.X_AXIS)
-    components.forEach(::add)
 }
 ```
 
 ### `also`
 
 ```kotlin
-when (bytecode) {
-    RETURN -> executeReturn()
-
-    MOVE_FORWARD -> worldRef.updateAndGet(World::moveForward).also { onMove?.invoke(it) }
-    TURN_LEFT -> worldRef.updateAndGet(World::turnLeft)
-    TURN_AROUND -> worldRef.updateAndGet(World::turnAround)
-    TURN_RIGHT -> worldRef.updateAndGet(World::turnRight)
-    PICK_BEEPER -> worldRef.updateAndGet(World::pickBeeper).also { onPickDrop?.invoke(it) }
-    DROP_BEEPER -> worldRef.updateAndGet(World::dropBeeper).also { onPickDrop?.invoke(it) }
-
-    // ...
-}
+val temp = result.delayed()
+memory.popStackFrameUnlessEntryPoint()
+return temp
 ```
 
 ```kotlin
-// skorbut Interpreter.kt
-
 return result.delayed().also { memory.popStackFrameUnlessEntryPoint() }
 ```
 
 ### `with`
+
+```kotlin
+var previousValue = controlPanel.slider.value
+
+controlPanel.pause.addActionListener {
+    val slider = controlPanel.slider
+    if (slider.value != slider.minimum) {
+        if (slider.value != slider.maximum) {
+            previousValue = slider.value
+        }
+        slider.value = slider.minimum
+    } else {
+        slider.value = previousValue
+    }
+}
+```
 
 ```kotlin
 var previousValue = controlPanel.slider.value
@@ -805,15 +799,6 @@ virtualMachine = VirtualMachine(
     onCall = editor::push.takeIf { compiledFromSource },
     onReturn = editor::pop.takeIf { compiledFromSource },
     onInfiniteLoop = ::onInfiniteLoop,
-)
-```
-
-```kotlin
-virtualMachine = VirtualMachine(
-    instructions, worldRef,
-    onInfiniteLoop = ::onInfiniteLoop,
-    onPickDrop = callback,
-    onMove = callback.takeIf { Check.EVERY_PICK_DROP_MOVE == currentProblem.check },
 )
 ```
 
