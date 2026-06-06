@@ -76,12 +76,12 @@ fun main() {
 ```
 
 > **Exercise**
-> 1. Download [IntelliJ IDEA **Community Edition**](https://www.jetbrains.com/idea/download) 👇 **Scroll Down** 👇
-> 2. Import the *Hello World* project
+> 1. Unless already installed, download and install [IntelliJ IDEA](https://github.com/JetBrains/intellij-community/releases)
+> 2. Import the demo project:
 >    - File > New > Project from Version Control...
 >    - URL: https://github.com/frectures/kotlin.git
 >    - Clone
-> 3. If the Project View is hidden, press Alt+1
+> 3. If the Project View is hidden, press `Alt+1`
 > 4. Open `src/main/kotlin/Kotlin.kt`
 > 5. Start the `main` function via the green triangle beside it
 > 6. Modify the program to print something else
@@ -218,6 +218,7 @@ fun signum(x: Int): Int = when {
 
 > **Exercise**
 > 1. Implement a function `gcd` which computes the greatest common divisor of two integers
+>    - see **3rd subsection** `Eclidian Algorithm` on [Wikipedia](https://en.wikipedia.org/wiki/Greatest_common_divisor#Calculation)
 
 ## Default and Named arguments
 
@@ -609,7 +610,7 @@ class MyService(
 const val ENTRY_POINT = 256
 
 class VirtualMachine(
-    private val program: List<Instruction>,
+    private val program: Array<Instruction>,
     // ...
 ) {
 
@@ -806,16 +807,6 @@ controlPanel.pause.addActionListener {
 ```diff
 -   with(controlPanel.slider)    {
 +        controlPanel.slider.run {
-```
-
-### `takeIf`
-
-```kotlin
-virtualMachine = VirtualMachine(
-    instructions, initialWorld,
-    onCall = editor::push.takeIf { compiledFromSource },
-    onReturn = editor::pop.takeIf { compiledFromSource },
-)
 ```
 
 ## Eager vs. Lazy
