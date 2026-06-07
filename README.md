@@ -1035,40 +1035,16 @@ fruits.forEach { (key, value) ->
 }
 ```
 
-## Katas/Dojos
+## Testing
 
-- https://adventofcode.com
-- https://leetcode.com/problemset/all
+- `src/test/kotlin/IntegerLimitsTest.kt`
+  - Jupiter vs. AssertJ
+- `src/test/kotlin/stack/StackTest.kt`
+  - multiple tests fail
+  - fix bugs in `Stack.kt`
 
-### Regular expressions
+### Advent of Code
 
-```kotlin
-data class Address(val street: String, val streetNumber: String) {
-    companion object {
-        val ADDRESS: Regex = """(\D+?)\s*(\d+.*)""".toRegex()
-
-        @JvmStatic
-        fun parse(line: String): Address {
-            val (street, streetNumber) = ADDRESS.matchEntire(line)?.destructured ?: error(line)
-            return Address(street, streetNumber)
-        }
-    }
-}
-
-fun main() {
-    val text = """
-        Musterstr.123
-        Muster-Gasse 4e
-        Unter der Ulme 6g
-    """.trimIndent()
-    val addresses = text.lines().map(Address::parse)
-    println(addresses)
-}
-```
-
-- Companion objects replace `static` members
-  - adopted from Scala
-  - `@JvmStatic` provides `static` bridge for Java interop
-- Triple quotes introduce raw strings
-  - `\` instead of `\\`
-  - actual line break instead of `\n`
+- `src/test/kotlin/advent/AdventOfCodeTest.kt`
+  - solve puzzles in `AdventOfCode.kt`
+- Want more? https://adventofcode.com
