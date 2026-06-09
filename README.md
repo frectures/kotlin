@@ -724,16 +724,41 @@ largestDownload().inputStream().buffered().use { inputStream ->
 ### `let`
 
 ```kotlin
-private fun Expression.evaluate(): Value {
-    if (value != null) {
-        // error: 'value' is a mutable property
-        // that could have been changed by this time
-        return value
-    }
+class WorldPanel(private var world: World) {
 
-    value?.let { return it }
+    var  leftWorld: World? = null
+    var rightWorld: World? = null
 
     // ...
+
+    if (SwingUtilities.isLeftMouseButton(event)) {
+ 
+        // 1. naïve solution, fails
+        if (leftWorld != null) {
+            // error: 'leftWorld' is a mutable property
+            // that could have been changed by this time
+            world = leftWorld
+        }
+
+        // 2. local variable workaround
+        val temp = leftWorld
+        if (temp != null) {
+            world = temp
+        }
+
+        // 3. idiomatic Kotlin solution
+        leftWorld?.let {
+            world = it
+        }
+    }
+
+    // ...
+}
+```
+
+```kotlin
+public inline fun <T, R> T.let(block: (T) -> R): R {
+    return block(this)
 }
 ```
 
