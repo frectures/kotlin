@@ -2,6 +2,7 @@ package stack
 
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class StackTest {
     private val stack = Stack()
@@ -34,8 +35,13 @@ class StackTest {
     }
 
     @Test
-    fun `cant pop empty stack`() {
-        assertThatException().isThrownBy {
+    fun `can't pop empty stack`() {
+        // AssertJ
+        assertThatExceptionOfType(IllegalStateException::class.java).isThrownBy {
+            stack.pop()
+        }
+        // Jupiter loves Kotlin
+        assertThrows<IllegalStateException> {
             stack.pop()
         }
     }
@@ -56,5 +62,13 @@ class StackTest {
         stack.push("three")
 
         assertThat(stack.toArray()).containsExactly("one", "two", "three")
+    }
+
+    @Test
+    fun `empty strings survive`() {
+        stack.push(" ")
+        stack.push("")
+
+        assertThat(stack.toArray()).containsExactly(" ", "")
     }
 }

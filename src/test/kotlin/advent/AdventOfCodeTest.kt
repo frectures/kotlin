@@ -1,23 +1,11 @@
 package advent
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 class AdventOfCodeTest {
-    @Test
-    fun `test 2020 day 1 part 1`() {
-        val entries = listOf(
-            1010,
-            1721,
-            979,
-            366,
-            299,
-            675,
-            1456,
-        )
-        assertThat(`2020 day 1 part 1`(entries)).isEqualTo(1721 * 299)
-    }
-
     @Test
     fun `test 2021 day 1 part 1`() {
         val measurements = listOf(
@@ -45,6 +33,51 @@ class AdventOfCodeTest {
             listOf(10000),
         )
         assertThat(`2022 day 1 part 1`(backpacks)).isEqualTo(7000 + 8000 + 9000)
+    }
+
+    @Nested
+    @DisplayName("test 2020 day 1 part 1")
+    inner class Test2020 {
+        @Test
+        fun `leading 1010`() {
+            val entries = listOf(
+                1010,
+                1721,
+                979,
+                366,
+                675,
+                1456,
+                299,
+            )
+            assertThat(`2020 day 1 part 1`(entries)).isEqualTo(1721 * 299)
+        }
+
+        @Test
+        fun `trailing 1010`() {
+            val entries = listOf(
+                1721,
+                979,
+                366,
+                675,
+                1456,
+                299,
+                1010,
+            )
+            assertThat(`2020 day 1 part 1`(entries)).isEqualTo(1721 * 299)
+        }
+
+        @Test
+        fun `different 1010s`() {
+            val entries = listOf(
+                1010,
+                979,
+                366,
+                675,
+                1456,
+                1010,
+            )
+            assertThat(`2020 day 1 part 1`(entries)).isEqualTo(1010 * 1010)
+        }
     }
 
     @Test
